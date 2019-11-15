@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/plugins/plan_frames" >
+        <file>icon.png</file>
+    </qresource>
+</RCC>
