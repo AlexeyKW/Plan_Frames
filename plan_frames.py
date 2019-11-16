@@ -276,5 +276,7 @@ class PlanFrames:
                 grid_feature.setFields(fields_grid)
                 grid_feature['filename'] = self.dlg.lineEdit_4.text()
                 grid_layer.dataProvider().addFeatures([grid_feature])
+            grid_layer.updateExtents()
             grid_layer.commitChanges()
+        frame_layer.updateExtents() 
         frame_layer.commitChanges()
