@@ -213,7 +213,7 @@ class PlanFrames:
             #QgsMessageLog.logMessage(frame_layer.name())
             #frame_layer.updateExtents()
             #QgsMessageLog.logMessage(self.dlg.lineEdit.text())
-            # substitute with your code.
+            self.dlg.pushButton.disconnect()
             pass
 
     def makeFrame(self):
