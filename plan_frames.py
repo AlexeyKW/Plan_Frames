@@ -213,22 +213,30 @@ class PlanFrames:
             #QgsMessageLog.logMessage(frame_layer.name())
             #frame_layer.updateExtents()
             #QgsMessageLog.logMessage(self.dlg.lineEdit.text())
-            self.dlg.pushButton.disconnect()
             pass
+        self.dlg.pushButton.disconnect()
 
     def makeFrame(self):
         #QgsMessageLog.logMessage("test1")
         #QgsMessageLog.logMessage(self.dlg.comboBox.currentText())
         if self.dlg.comboBox.currentText() == '1:500':
             delta=250
+            section = 5
         if self.dlg.comboBox.currentText() == '1:1000':
             delta=500
+            section = 5
         if self.dlg.comboBox.currentText() == '1:2000':
             delta=1000
+            section = 5
         if self.dlg.comboBox.currentText() == '1:5000':
             delta=2000
-        if self.dlg.comboBox.currentText() == '1:5000 2500м':
+            section = 5
+        if self.dlg.comboBox.currentText() == '1:5000 размер планшета 2500м':
             delta=2500
+            section = 5
+        if self.dlg.comboBox.currentText() == '1:5000 планшет 40x40см, размер планшета 2000м':
+            delta=2000
+            section = 4
         X1=self.dlg.lineEdit.text()
         Y1=self.dlg.lineEdit_2.text()
         X2=X1
@@ -259,9 +267,9 @@ class PlanFrames:
         #QgsMessageLog.logMessage(str(wkt_coords))
         if self.dlg.checkBox.isChecked():
             grid_layer.startEditing()
-            for i in range(1,5):
+            for i in range(1,section):
                 grid_wkt_v=''
-                grid_wkt_v = 'linestring('+str(int(X1)+delta/5*i)+' '+Y1+', '+str(int(X1)+delta/5*i)+' '+Y2+')'
+                grid_wkt_v = 'linestring('+str(int(X1)+delta/section*i)+' '+Y1+', '+str(int(X1)+delta/section*i)+' '+Y2+')'
                 grid_feature = None
                 grid_feature = QgsFeature()
                 grid_feature.setGeometry(QgsGeometry.fromWkt(grid_wkt_v))
@@ -269,7 +277,7 @@ class PlanFrames:
                 grid_feature['filename'] = self.dlg.lineEdit_4.text()
                 grid_layer.dataProvider().addFeatures([grid_feature])
                 grid_wkt_h=''
-                grid_wkt_h = 'linestring('+X1+' '+str(int(Y1)+delta/5*i)+', '+X3+' '+str(int(Y1)+delta/5*i)+')'
+                grid_wkt_h = 'linestring('+X1+' '+str(int(Y1)+delta/section*i)+', '+X3+' '+str(int(Y1)+delta/section*i)+')'
                 grid_feature = None
                 grid_feature = QgsFeature()
                 grid_feature.setGeometry(QgsGeometry.fromWkt(grid_wkt_h))
